@@ -1,0 +1,13 @@
+module.exports = {
+    data: {
+        name: "test",
+        description: "test",
+        options: [],
+        type: 1
+    },
+    cooldown: "1s",
+    permissions: ["ADMINISTRATOR"],
+    async execute(interaction){
+        await interaction.reply("Working!")
+    }
+}
