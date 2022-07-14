@@ -23,19 +23,19 @@ client.cooldown = new Collection()
 
 // Add commands and events
 for(const file of eventFiles){
-    const event = require(file);
+    const event = require(`./events/${file}`);
     client.on(event.name, event.execute.bind(null, client))
 }
 
 for(const file of commandFiles){
-    const command = require(file)
+    const command = require(`./commands/${file}`)
     commands.push(command.data)
-    commands.set(command.data.name, command)
+    client.commands.set(command.data.name, command)
 }
 
 // Register application commands
 (async() => {
-    await api.put(`https://discord.com/api/${process.env.version}/applications/${process.env.id}/commands`)
+    await api.put(`https://discord.com/api/${process.env.version}/applications/${process.env.id}/commands`, { body: commands })
     console.log(`Successfully registered application commands.`)
 })
 
