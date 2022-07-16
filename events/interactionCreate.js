@@ -1,6 +1,5 @@
 const { CommandInteraction, Client, Collection } = require("discord.js")
 const ms = require("ms")
-const prettyMilliseconds = require("pretty-ms")
 
 module.exports = {
     name: "interactionCreate",
@@ -9,6 +8,7 @@ module.exports = {
      * @param {CommandInteraction} interaction
      */
     async execute(client, interaction){
+        const { default: prettyMilliseconds } = await import("pretty-ms")
         if(interaction.isCommand()){
             const command = client.commands.get(interaction.commandName)
             if(!interaction.guild || !interaction.member) return await interaction.reply({ content: "This command must be executed in a guild.", ephemeral: true })
